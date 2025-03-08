@@ -3,7 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternateIcon";
 import React, { useCallback } from "react";
 import { storage } from "../../firebase/index"
-import imagePreview from "./imagePreview";
+import imagePreview from "./ImagePreview";
 
 const useStyles = makeStyles({
     icon: {

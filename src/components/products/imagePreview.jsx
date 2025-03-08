@@ -1,6 +1,6 @@
 import React from "react";
 
-const imagePreview = (props) => {
+const ImagePreview = (props) => {
     return (
         <div className="p-media__thumb" onClick={() => props.delete(props.id)}>
             <img alt="プレビュー画像" srcs={props.path}/>
@@ -8,4 +8,4 @@ const imagePreview = (props) => {
     )
 }
 
-export default imagePreview
+export default ImagePreview
