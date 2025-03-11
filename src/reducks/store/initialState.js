@@ -5,6 +5,7 @@ const initialState = {
     users: {
         cart: [],
         isSignIn: false,
+        orders: [],
         role: "",
         uid: "",
         username: ""

@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import { PrimaryButton, SelectBox, TextInput } from "../components/UIkit";
 import { useDispatch } from "react-redux";
 import { saveProduct } from "../reducks/products/operations"
-import ImageArea from "../components/products/ImageArea";
+import ImageArea from "../components/Products/ImageArea";
 import { db } from "../firebase/index";
-import SetSizeArea from "../components/products/SetSizeArea";
+import SetSizeArea from "../components/Products/SetSizeArea";
 
 const ProductEdit = () => {
     const dispatch = useDispatch();
@@ -17,6 +17,7 @@ const ProductEdit = () => {
     const [name, setName] = useState(""),
           [discription, setDiscription] = useState(""),
           [category, setCategory] = useState(""),
+          [categories, setCategories] = useState([]),
           [gender, setGender] = useState(""),
           [images, setImages] = useState([]),
           [price, setPrice] = useState("");
@@ -33,12 +34,6 @@ const ProductEdit = () => {
     const inputPrice = useCallback((event) => {
         setPrice(event.target.value)
     }, [setPrice])
-
-    const categories = [
-        {id:"tops", name: "トップス"},
-        {id:"shirts", name: "シャツ"},
-        {id:"pants", name: "パンツ"},
-    ];
 
     const genders = [
         {id:"all", name: "すべて"},
@@ -61,6 +56,23 @@ const ProductEdit = () => {
             })
         }
     }, [id])
+
+    useEffect(() => {
+        db.collection('categories')
+           .orderBy('order', 'asc')
+           .get()
+           .then(snapshots => {
+            const list = []
+            snapshots.forEach(snapshot => {
+                const data = snapshot.data()
+                list.push({
+                    id: data.id,
+                    name: data.name
+                })
+            })
+            setCategories(list)
+           })
+    },  [])
 
     return(
         <section>
